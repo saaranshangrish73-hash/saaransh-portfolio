@@ -1,0 +1,21 @@
+{
+  "name": "saaransh-portfolio",
+  "version": "1.0.0",
+  "description": "Aesthetic, modern personal developer portfolio for Saaransh (srsh.webworks).",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve .",
+    "dev": "npx serve ."
+  },
+  "keywords": [
+    "portfolio",
+    "web-developer",
+    "saaransh",
+    "srsh.webworks",
+    "frontend",
+    "ui-ux",
+    "glassmorphism"
+  ],
+  "author": "Saaransh",
+  "license": "MIT"
+}
