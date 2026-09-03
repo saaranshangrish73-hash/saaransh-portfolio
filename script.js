@@ -67,11 +67,11 @@ function initTypewriter() {
   if (!typewriterElem) return;
 
   const phrases = [
-    'Web Experiences.',
-    'Modern Frontends.',
-    'Aesthetic Interfaces.',
-    'Fast Web Apps.',
-    'Pixel-Perfect Code.'
+    'Websites.',
+    'Web Apps.',
+    'Frontends.',
+    'UI/UX Designs.',
+    'Experiences.'
   ];
 
   let phraseIndex = 0;
