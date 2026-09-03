@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NovaFlow AI — Next-Gen Automation & Workflow Builder (Demo)</title>
+  <meta name="description" content="Interactive SaaS AI Workflow & Automation Web App Demo built by Saaransh (srsh.webworks).">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌊</text></svg>">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <style>
+    :root {
+      --bg-dark: #070a13;
+      --bg-surface: #0e1526;
+      --bg-card: rgba(18, 27, 49, 0.75);
+      --border-color: rgba(255, 255, 255, 0.08);
+      --border-glow: rgba(0, 242, 254, 0.35);
+      
+      --accent-cyan: #00f2fe;
+      --accent-blue: #4facfe;
+      --accent-purple: #a855f7;
+      --accent-emerald: #10b981;
+      --accent-amber: #f59e0b;
+      --accent-rose: #f43f5e;
+      
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      
+      --font-display: 'Outfit', sans-serif;
+      --font-sans: 'Plus Jakarta Sans', sans-serif;
+      --font-mono: 'Fira Code', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* Top Portfolio Return Banner */
+    .portfolio-banner {
+      background: linear-gradient(90deg, #090d16 0%, #151d33 50%, #090d16 100%);
+      border-bottom: 1px solid rgba(0, 242, 254, 0.25);
+      padding: 8px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.82rem;
+      z-index: 1000;
+    }
+    .pb-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text-muted);
+    }
+    .pb-badge {
+      background: rgba(0, 242, 254, 0.15);
+      color: var(--accent-cyan);
+      border: 1px solid rgba(0, 242, 254, 0.4);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-family: var(--font-mono);
+      font-weight: 600;
+      font-size: 0.72rem;
+    }
+    .pb-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .btn-return-portfolio {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border-color);
+      transition: all 0.2s;
+    }
+    .btn-return-portfolio:hover {
+      background: var(--accent-cyan);
+      color: #070a13;
+    }
+    .btn-hire-creator {
+      background: linear-gradient(135deg, #00f2fe 0%, #a855f7 100%);
+      color: #070a13;
+      text-decoration: none;
+      font-weight: 700;
+      padding: 4px 14px;
+      border-radius: 6px;
+      transition: all 0.2s;
+    }
+    .btn-hire-creator:hover {
+      box-shadow: 0 0 15px rgba(0, 242, 254, 0.4);
+      transform: translateY(-1px);
+    }
+
+    /* App Header */
+    .app-header {
+      background: rgba(14, 21, 38, 0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-color);
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .brand-section {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+    .app-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.25rem;
+      letter-spacing: -0.5px;
+    }
+    .app-logo i {
+      color: var(--accent-cyan);
+    }
+    .pipeline-dropdown {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+    .status-dot-pulse {
+      width: 7px;
+      height: 7px;
+      background: var(--accent-emerald);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--accent-emerald);
+    }
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .btn-app {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 0.84rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s;
+    }
+    .btn-app-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+    }
+    .btn-app-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+    .btn-app-primary {
+      background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+      color: #070a13;
+      font-weight: 700;
+      box-shadow: 0 0 15px rgba(0, 242, 254, 0.3);
+    }
+    .btn-app-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 0 25px rgba(0, 242, 254, 0.5);
+    }
+
+    /* Main Workspace Layout */
+    .app-layout {
+      display: grid;
+      grid-template-columns: 260px 1fr 320px;
+      flex: 1;
+      height: calc(100vh - 110px);
+      overflow: hidden;
+    }
+
+    /* Sidebar: Node Library */
+    .sidebar-nodes {
+      background: #090e1c;
+      border-right: 1px solid var(--border-color);
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      overflow-y: auto;
+    }
+    .sidebar-title {
+      font-size: 0.76rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--text-dim);
+    }
+    .node-palette-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .palette-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 12px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      font-size: 0.84rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .palette-item:hover {
+      border-color: var(--accent-cyan);
+      background: rgba(0, 242, 254, 0.08);
+      transform: translateX(3px);
+    }
+    .palette-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.95rem;
+      flex-shrink: 0;
+    }
+    .icon-webhook { background: rgba(0, 242, 254, 0.15); color: var(--accent-cyan); }
+    .icon-ai { background: rgba(168, 85, 247, 0.15); color: var(--accent-purple); }
+    .icon-filter { background: rgba(245, 158, 11, 0.15); color: var(--accent-amber); }
+    .icon-action { background: rgba(16, 185, 129, 0.15); color: var(--accent-emerald); }
+    .icon-db { background: rgba(244, 63, 94, 0.15); color: var(--accent-rose); }
+
+    /* Canvas / Flow Area */
+    .flow-canvas-wrapper {
+      position: relative;
+      background-color: #070a13;
+      background-image: 
+        radial-gradient(circle at 50% 50%, rgba(0, 242, 254, 0.05), transparent 70%),
+        radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+      background-size: 100% 100%, 28px 28px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .canvas-toolbar {
+      position: absolute;
+      top: 16px;
+      left: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(14, 21, 38, 0.85);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 6px 12px;
+      z-index: 10;
+    }
+    .canvas-tab-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 5px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .canvas-tab-btn.active {
+      background: rgba(0, 242, 254, 0.15);
+      color: var(--accent-cyan);
+    }
+
+    /* Flow Graph Nodes Container */
+    .graph-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* SVG Connecting Curves */
+    .connections-svg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .connection-line {
+      fill: none;
+      stroke: rgba(255, 255, 255, 0.15);
+      stroke-width: 2.5;
+      stroke-dasharray: 6;
+      animation: dashMove 20s linear infinite;
+    }
+    .connection-line.active {
+      stroke: var(--accent-cyan);
+      filter: drop-shadow(0 0 6px rgba(0, 242, 254, 0.8));
+    }
+    @keyframes dashMove {
+      to { stroke-dashoffset: -100; }
+    }
+
+    .nodes-track {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 48px;
+      z-index: 2;
+      padding: 40px;
+    }
+
+    /* Flow Node Card */
+    .flow-node {
+      width: 210px;
+      background: rgba(14, 21, 38, 0.95);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+      position: relative;
+    }
+    .flow-node:hover, .flow-node.selected {
+      border-color: var(--accent-cyan);
+      transform: translateY(-4px);
+      box-shadow: 0 15px 40px rgba(0, 242, 254, 0.2);
+    }
+    .flow-node.executing {
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 25px rgba(0, 242, 254, 0.6);
+      animation: nodePulse 0.8s infinite alternate;
+    }
+    .flow-node.success {
+      border-color: var(--accent-emerald);
+      box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+    }
+    @keyframes nodePulse {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.03); }
+    }
+
+    .node-header {
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    .node-type {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+    .node-status-badge {
+      font-size: 0.65rem;
+      font-family: var(--font-mono);
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-muted);
+    }
+    .node-status-badge.ready { color: var(--accent-cyan); background: rgba(0, 242, 254, 0.12); }
+    .node-status-badge.running { color: #fbbf24; background: rgba(245, 158, 11, 0.15); }
+    .node-status-badge.done { color: var(--accent-emerald); background: rgba(16, 185, 129, 0.15); }
+
+    .node-body {
+      padding: 14px;
+    }
+    .node-title {
+      font-size: 0.88rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .node-sub {
+      font-size: 0.74rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+      font-family: var(--font-mono);
+    }
+
+    /* Right Sidebar: Execution Console & Node Inspector */
+    .sidebar-inspector {
+      background: #090e1c;
+      border-left: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+    .inspector-header {
+      padding: 16px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .inspector-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .inspector-body {
+      padding: 16px;
+      flex: 1;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .log-box {
+      background: #050811;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      padding: 12px;
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      line-height: 1.7;
+      min-height: 180px;
+      max-height: 240px;
+      overflow-y: auto;
+    }
+    .log-entry { margin-bottom: 4px; color: var(--text-muted); }
+    .log-entry.info { color: var(--accent-cyan); }
+    .log-entry.success { color: var(--accent-emerald); }
+    .log-entry.warn { color: var(--accent-amber); }
+
+    /* Interactive AI Playground Overlay View */
+    .view-container {
+      display: none;
+      width: 100%;
+      height: 100%;
+      padding: 30px;
+      overflow-y: auto;
+    }
+    .view-container.active {
+      display: block;
+    }
+    .playground-box {
+      max-width: 750px;
+      margin: 0 auto;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 24px;
+    }
+    .form-label {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+      display: block;
+    }
+    .select-template, .prompt-textarea {
+      width: 100%;
+      padding: 10px 14px;
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      color: #fff;
+      font-family: inherit;
+      font-size: 0.88rem;
+      margin-bottom: 14px;
+      outline: none;
+    }
+    .select-template:focus, .prompt-textarea:focus {
+      border-color: var(--accent-cyan);
+    }
+    .ai-output-area {
+      background: #050811;
+      border: 1px solid rgba(0, 242, 254, 0.25);
+      border-radius: 8px;
+      padding: 16px;
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      line-height: 1.6;
+      color: #86efac;
+      min-height: 120px;
+      margin-top: 14px;
+    }
+
+    /* Enhanced Mobile Responsiveness */
+    @media (max-width: 1024px) {
+      .app-layout { 
+        display: flex;
+        flex-direction: column; 
+        height: auto; 
+        min-height: auto;
+      }
+      .sidebar-nodes { display: none; }
+      .sidebar-inspector {
+        border-left: none;
+        border-top: 1px solid var(--border-color);
+        height: auto;
+        padding-bottom: 30px;
+      }
+      .nodes-track { 
+        flex-direction: column; 
+        gap: 20px; 
+        padding: 30px 16px;
+        width: 100%;
+      }
+      .flow-node {
+        width: 100%;
+        max-width: 340px;
+      }
+      .connections-svg { display: none; }
+    }
+
+    @media (max-width: 768px) {
+      .portfolio-banner {
+        flex-direction: column;
+        gap: 8px;
+        padding: 8px 14px;
+        text-align: center;
+      }
+      .pb-left {
+        font-size: 0.74rem;
+        justify-content: center;
+      }
+      .pb-right {
+        width: 100%;
+        justify-content: center;
+        gap: 8px;
+      }
+      .btn-return-portfolio, .btn-hire-creator {
+        flex: 1;
+        justify-content: center;
+        text-align: center;
+        font-size: 0.75rem;
+        padding: 6px 10px;
+      }
+
+      .app-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+        padding: 14px 16px;
+      }
+      .brand-section {
+        justify-content: space-between;
+      }
+      .pipeline-dropdown {
+        font-size: 0.72rem;
+        padding: 4px 8px;
+      }
+      .header-actions {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: 8px;
+        width: 100%;
+      }
+      .btn-app {
+        justify-content: center;
+        padding: 10px;
+        font-size: 0.82rem;
+      }
+
+      .canvas-toolbar {
+        position: static;
+        margin: 12px 16px;
+        justify-content: center;
+      }
+      .canvas-tab-btn {
+        flex: 1;
+        text-align: center;
+        font-size: 0.76rem;
+      }
+
+      .playground-box {
+        padding: 16px;
+      }
+      .ai-output-area {
+        font-size: 0.74rem;
+        padding: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Creator Return Bar -->
+  <div class="portfolio-banner">
+    <div class="pb-left">
+      <span class="pb-badge">LIVE DEMO</span>
+      <span>NovaFlow AI Automation Engine — Project Prototype</span>
+    </div>
+    <div class="pb-right">
+      <a href="../../index.html#projects" class="btn-return-portfolio">
+        <i class="fa-solid fa-arrow-left"></i> Back to Saaransh Portfolio
+      </a>
+      <a href="../../index.html#contact" class="btn-hire-creator">
+        <i class="fa-solid fa-bolt"></i> Hire Saaransh
+      </a>
+    </div>
+  </div>
+
+  <!-- App Header -->
+  <header class="app-header">
+    <div class="brand-section">
+      <div class="app-logo">
+        <i class="fa-solid fa-wave-square"></i>
+        <span>NovaFlow<span style="color:var(--accent-cyan)">.ai</span></span>
+      </div>
+      <div class="pipeline-dropdown">
+        <span class="status-dot-pulse"></span>
+        <span>Workflow: Customer Lead Triage v2.4 (Active)</span>
+      </div>
+    </div>
+    <div class="header-actions">
+      <button class="btn-app btn-app-secondary" id="resetPipelineBtn">
+        <i class="fa-solid fa-rotate-left"></i> Reset
+      </button>
+      <button class="btn-app btn-app-primary" id="runPipelineBtn">
+        <i class="fa-solid fa-play"></i>
+        <span>Run Test Execution</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Workspace Grid -->
+  <main class="app-layout">
+    
+    <!-- Left Sidebar: Node Library -->
+    <aside class="sidebar-nodes">
+      <span class="sidebar-title">Pipeline Building Blocks</span>
+      <div class="node-palette-list">
+        <div class="palette-item">
+          <div class="palette-icon icon-webhook"><i class="fa-solid fa-satellite-dish"></i></div>
+          <div>
+            <strong>Webhook Trigger</strong>
+            <p style="font-size:0.72rem; color:var(--text-dim);">HTTP POST Ingestion</p>
+          </div>
+        </div>
+
+        <div class="palette-item">
+          <div class="palette-icon icon-ai"><i class="fa-solid fa-brain"></i></div>
+          <div>
+            <strong>Gemini AI LLM</strong>
+            <p style="font-size:0.72rem; color:var(--text-dim);">Sentiment & Intent Extractor</p>
+          </div>
+        </div>
+
+        <div class="palette-item">
+          <div class="palette-icon icon-filter"><i class="fa-solid fa-filter"></i></div>
+          <div>
+            <strong>Condition Router</strong>
+            <p style="font-size:0.72rem; color:var(--text-dim);">If Priority &gt;= High</p>
+          </div>
+        </div>
+
+        <div class="palette-item">
+          <div class="palette-icon icon-action"><i class="fa-brands fa-slack"></i></div>
+          <div>
+            <strong>Slack Notification</strong>
+            <p style="font-size:0.72rem; color:var(--text-dim);">Alert #sales-leads</p>
+          </div>
+        </div>
+
+        <div class="palette-item">
+          <div class="palette-icon icon-db"><i class="fa-solid fa-database"></i></div>
+          <div>
+            <strong>Database Sync</strong>
+            <p style="font-size:0.72rem; color:var(--text-dim);">PostgreSQL / Supabase</p>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Center Flow Canvas Area -->
+    <section class="flow-canvas-wrapper">
+      
+      <!-- Top Canvas Tab Selector -->
+      <div class="canvas-toolbar">
+        <button class="canvas-tab-btn active" id="tabWorkflowBtn"><i class="fa-solid fa-diagram-project"></i> Workflow Graph</button>
+        <button class="canvas-tab-btn" id="tabPlaygroundBtn"><i class="fa-solid fa-terminal"></i> AI Prompt Playground</button>
+      </div>
+
+      <!-- VIEW 1: WORKFLOW GRAPH -->
+      <div class="graph-container view-container active" id="workflowView">
+        
+        <!-- SVG Connections -->
+        <svg class="connections-svg" id="svgConnections" viewBox="0 0 1000 600" preserveAspectRatio="none">
+          <path id="path1" class="connection-line active" d="M 210 300 C 300 300, 310 300, 400 300" />
+          <path id="path2" class="connection-line active" d="M 460 300 C 550 300, 560 300, 650 300" />
+          <path id="path3" class="connection-line active" d="M 710 300 C 800 300, 810 300, 900 300" />
+        </svg>
+
+        <!-- Node Chain -->
+        <div class="nodes-track">
+          
+          <!-- Node 1 -->
+          <div class="flow-node" id="node1">
+            <div class="node-header">
+              <span class="node-type"><i class="fa-solid fa-satellite-dish" style="color:var(--accent-cyan);"></i> Ingestion</span>
+              <span class="node-status-badge ready" id="status1">READY</span>
+            </div>
+            <div class="node-body">
+              <div class="node-title">Webhook Listener</div>
+              <div class="node-sub">POST /api/v1/leads</div>
+            </div>
+          </div>
+
+          <!-- Node 2 -->
+          <div class="flow-node" id="node2">
+            <div class="node-header">
+              <span class="node-type"><i class="fa-solid fa-brain" style="color:var(--accent-purple);"></i> Intelligence</span>
+              <span class="node-status-badge ready" id="status2">READY</span>
+            </div>
+            <div class="node-body">
+              <div class="node-title">AI LLM Classifier</div>
+              <div class="node-sub">Gemini 2.5 Flash • Intent</div>
+            </div>
+          </div>
+
+          <!-- Node 3 -->
+          <div class="flow-node" id="node3">
+            <div class="node-header">
+              <span class="node-type"><i class="fa-solid fa-filter" style="color:var(--accent-amber);"></i> Logic Gate</span>
+              <span class="node-status-badge ready" id="status3">READY</span>
+            </div>
+            <div class="node-body">
+              <div class="node-title">Condition Filter</div>
+              <div class="node-sub">Score &gt;= 0.85 (High)</div>
+            </div>
+          </div>
+
+          <!-- Node 4 -->
+          <div class="flow-node" id="node4">
+            <div class="node-header">
+              <span class="node-type"><i class="fa-brands fa-slack" style="color:var(--accent-emerald);"></i> Action</span>
+              <span class="node-status-badge ready" id="status4">READY</span>
+            </div>
+            <div class="node-body">
+              <div class="node-title">Slack & CRM Alert</div>
+              <div class="node-sub">#hot-leads & HubSpot</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- VIEW 2: AI PROMPT PLAYGROUND -->
+      <div class="view-container" id="playgroundView">
+        <div class="playground-box">
+          <h3 style="margin-bottom: 12px; font-family: var(--font-display);">Interactive AI Model Playground</h3>
+          <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 20px;">
+            Test the underlying NovaFlow reasoning logic live in your browser.
+          </p>
+
+          <label class="form-label" for="templateSelector">Select Test Scenario:</label>
+          <select class="select-template" id="templateSelector">
+            <option value="lead">Enterprise Lead Qualification (High Intent)</option>
+            <option value="support">Customer Support Sentiment Triage</option>
+            <option value="code">Automated Code Review & Security Audit</option>
+          </select>
+
+          <label class="form-label" for="promptInput">Payload Sample / Prompt:</label>
+          <textarea class="prompt-textarea" id="promptInput" rows="4">"Hello! We are looking to migrate 400,000 monthly active users to an automated AI workflow stack with SLA guarantees. Please contact us ASAP."</textarea>
+
+          <button class="btn-app btn-app-primary" id="runAiPromptBtn">
+            <i class="fa-solid fa-wand-magic-sparkles"></i> Process With NovaFlow AI
+          </button>
+
+          <div class="ai-output-area" id="aiOutputDisplay">
+            Click "Process With NovaFlow AI" to see simulated real-time streaming LLM extraction...
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Right Sidebar: Live Logs & Inspector -->
+    <aside class="sidebar-inspector">
+      <div class="inspector-header">
+        <span class="inspector-title"><i class="fa-solid fa-terminal" style="color:var(--accent-cyan);"></i> Live Execution Console</span>
+        <span style="font-size:0.7rem; color:var(--text-dim);" id="execTimer">0.00s</span>
+      </div>
+      <div class="inspector-body">
+        <div class="log-box" id="logConsole">
+          <div class="log-entry info">[SYSTEM] Pipeline initialized: "Customer Lead Triage v2.4"</div>
+          <div class="log-entry">[IDLE] Ready to receive execution trigger. Click 'Run Test Execution' above.</div>
+        </div>
+
+        <div style="background:var(--bg-card); padding:14px; border-radius:8px; border:1px solid var(--border-color);">
+          <span class="sidebar-title">Pipeline Health</span>
+          <div style="display:flex; justify-content:space-between; font-size:0.8rem; margin-top:8px;">
+            <span style="color:var(--text-muted);">Avg Latency:</span>
+            <strong style="color:var(--accent-cyan);">14.2 ms</strong>
+          </div>
+          <div style="display:flex; justify-content:space-between; font-size:0.8rem; margin-top:4px;">
+            <span style="color:var(--text-muted);">Success Rate:</span>
+            <strong style="color:var(--accent-emerald);">99.98%</strong>
+          </div>
+          <div style="display:flex; justify-content:space-between; font-size:0.8rem; margin-top:4px;">
+            <span style="color:var(--text-muted);">Today's Events:</span>
+            <strong style="color:#fff;">1,429,820</strong>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+  </main>
+
+  <!-- Interactive JavaScript -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const runPipelineBtn = document.getElementById('runPipelineBtn');
+      const resetPipelineBtn = document.getElementById('resetPipelineBtn');
+      const logConsole = document.getElementById('logConsole');
+      const tabWorkflowBtn = document.getElementById('tabWorkflowBtn');
+      const tabPlaygroundBtn = document.getElementById('tabPlaygroundBtn');
+      const workflowView = document.getElementById('workflowView');
+      const playgroundView = document.getElementById('playgroundView');
+      const templateSelector = document.getElementById('templateSelector');
+      const promptInput = document.getElementById('promptInput');
+      const runAiPromptBtn = document.getElementById('runAiPromptBtn');
+      const aiOutputDisplay = document.getElementById('aiOutputDisplay');
+
+      // Tab Switching
+      tabWorkflowBtn.addEventListener('click', () => {
+        tabWorkflowBtn.classList.add('active');
+        tabPlaygroundBtn.classList.remove('active');
+        workflowView.classList.add('active');
+        playgroundView.classList.remove('active');
+      });
+
+      tabPlaygroundBtn.addEventListener('click', () => {
+        tabPlaygroundBtn.classList.add('active');
+        tabWorkflowBtn.classList.remove('active');
+        playgroundView.classList.add('active');
+        workflowView.classList.remove('active');
+      });
+
+      // Pipeline execution simulation
+      let isRunning = false;
+
+      function addLog(text, type = '') {
+        const line = document.createElement('div');
+        line.className = `log-entry ${type}`;
+        const time = new Date().toISOString().split('T')[1].slice(0, 8);
+        line.textContent = `[${time}] ${text}`;
+        logConsole.appendChild(line);
+        logConsole.scrollTop = logConsole.scrollHeight;
+      }
+
+      function resetNodes() {
+        for (let i = 1; i <= 4; i++) {
+          const node = document.getElementById(`node${i}`);
+          const status = document.getElementById(`status${i}`);
+          if (node) {
+            node.className = 'flow-node';
+          }
+          if (status) {
+            status.className = 'node-status-badge ready';
+            status.textContent = 'READY';
+          }
+        }
+      }
+
+      resetPipelineBtn.addEventListener('click', () => {
+        resetNodes();
+        logConsole.innerHTML = '<div class="log-entry info">[SYSTEM] Console reset. Pipeline ready.</div>';
+      });
+
+      runPipelineBtn.addEventListener('click', async () => {
+        if (isRunning) return;
+        isRunning = true;
+        runPipelineBtn.disabled = true;
+        resetNodes();
+
+        addLog('--- INITIATING WORKFLOW EXECUTION ---', 'info');
+
+        // Node 1
+        const n1 = document.getElementById('node1');
+        const s1 = document.getElementById('status1');
+        n1.className = 'flow-node executing';
+        s1.className = 'node-status-badge running';
+        s1.textContent = 'INGESTING';
+        addLog('Node 1 (Webhook): Inbound HTTP payload received (2.4 KB)', 'info');
+
+        await delay(900);
+        n1.className = 'flow-node success';
+        s1.className = 'node-status-badge done';
+        s1.textContent = '200 OK (8ms)';
+
+        // Node 2
+        const n2 = document.getElementById('node2');
+        const s2 = document.getElementById('status2');
+        n2.className = 'flow-node executing';
+        s2.className = 'node-status-badge running';
+        s2.textContent = 'THINKING';
+        addLog('Node 2 (Gemini LLM): Extracting intent & classification score...', 'info');
+
+        await delay(1200);
+        n2.className = 'flow-node success';
+        s2.className = 'node-status-badge done';
+        s2.textContent = 'CONFIDENCE: 98%';
+        addLog('Node 2: Analysis complete. Classification="Enterprise Purchase", Score=0.96', 'success');
+
+        // Node 3
+        const n3 = document.getElementById('node3');
+        const s3 = document.getElementById('status3');
+        n3.className = 'flow-node executing';
+        s3.className = 'node-status-badge running';
+        s3.textContent = 'EVALUATING';
+        addLog('Node 3 (Logic Gate): Evaluating rule (Score >= 0.85)...', 'info');
+
+        await delay(800);
+        n3.className = 'flow-node success';
+        s3.className = 'node-status-badge done';
+        s3.textContent = 'PASSED (TRUE)';
+        addLog('Node 3: Condition satisfied. Triggering prioritized dispatch branch.', 'success');
+
+        // Node 4
+        const n4 = document.getElementById('node4');
+        const s4 = document.getElementById('status4');
+        n4.className = 'flow-node executing';
+        s4.className = 'node-status-badge running';
+        s4.textContent = 'NOTIFYING';
+        addLog('Node 4 (Slack/CRM): Dispatching urgent notification to #hot-leads & creating CRM deal...', 'info');
+
+        await delay(1000);
+        n4.className = 'flow-node success';
+        s4.className = 'node-status-badge done';
+        s4.textContent = 'DELIVERED';
+        addLog('Node 4: Slack message sent. HubSpot Deal #84920 created successfully.', 'success');
+        addLog('🎉 [EXECUTION COMPLETE] 4/4 nodes succeeded in 3.9s without errors.', 'success');
+
+        isRunning = false;
+        runPipelineBtn.disabled = false;
+      });
+
+      // AI Playground Templates
+      const templates = {
+        lead: `"Hello! We are looking to migrate 400,000 monthly active users to an automated AI workflow stack with SLA guarantees. Please contact us ASAP."`,
+        support: `"My invoice was charged twice yesterday for the Pro plan. Can someone please issue a refund immediately?"`,
+        code: `function calculateDiscount(price, userRole) {\n  if (userRole == "admin") return 0;\n  return price * 0.15;\n}`
+      };
+
+      templateSelector.addEventListener('change', (e) => {
+        promptInput.value = templates[e.target.value] || '';
+      });
+
+      runAiPromptBtn.addEventListener('click', () => {
+        const val = templateSelector.value;
+        aiOutputDisplay.textContent = 'Synthesizing with NovaFlow Neural Engine...';
+
+        setTimeout(() => {
+          let responseJson = {};
+          if (val === 'lead') {
+            responseJson = {
+              intent: "Enterprise Lead Acquisition",
+              estimatedValue: "$48,000/yr",
+              priority: "CRITICAL_HIGH",
+              recommendedAction: "Dispatch Senior Solutions Engineer",
+              sentimentScore: 0.96
+            };
+          } else if (val === 'support') {
+            responseJson = {
+              intent: "Billing / Double Charge Refund",
+              urgency: "HIGH",
+              sentiment: "Negative / Frustrated",
+              suggestedReply: "I apologize for the duplicate charge! I have initiated a refund of $49.00 to your original payment method.",
+              autoRefundEligible: true
+            };
+          } else {
+            responseJson = {
+              vulnerabilityScan: "SECURE",
+              codeSmell: "Loose equality operator '==' used instead of '==='",
+              optimizedCode: "const calculateDiscount = (price, role) => role === 'admin' ? 0 : price * 0.15;",
+              speedup: "+12%"
+            };
+          }
+
+          aiOutputDisplay.innerHTML = `<pre>${JSON.stringify(responseJson, null, 2)}</pre>`;
+        }, 800);
+      });
+
+      function delay(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+      }
+
+      // Source Code & Inspect Protection
+      document.addEventListener('contextmenu', (e) => e.preventDefault());
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'F12' || e.keyCode === 123) { e.preventDefault(); return false; }
+        if ((e.ctrlKey || e.metaKey) && (e.key === 'u' || e.key === 'U' || e.keyCode === 85)) { e.preventDefault(); return false; }
+        if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'i' || e.key === 'I' || e.keyCode === 73)) { e.preventDefault(); return false; }
+        if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'j' || e.key === 'J' || e.keyCode === 74)) { e.preventDefault(); return false; }
+        if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'c' || e.key === 'C' || e.keyCode === 67)) { e.preventDefault(); return false; }
+        if ((e.ctrlKey || e.metaKey) && (e.key === 's' || e.key === 'S' || e.keyCode === 83)) { e.preventDefault(); return false; }
+      });
+    });
+  </script>
+</body>
+</html>
