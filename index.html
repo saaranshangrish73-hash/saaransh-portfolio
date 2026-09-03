@@ -85,13 +85,13 @@
           <!-- Availability Badge -->
           <div class="status-pill">
             <span class="status-indicator"></span>
-            <span class="status-text">18 y/o Web Developer • Available for Projects & Freelance</span>
+            <span class="status-text">18 y/o Web Developer • Available for Projects</span>
           </div>
 
           <!-- Main Hero Title -->
           <h1 class="hero-title">
-            Crafting <span class="gradient-text">Aesthetic</span>,<br>
-            Modern & High-Octane<br>
+            Crafting <span class="gradient-text">Aesthetic</span>,<br class="desktop-break">
+            Modern & High-Octane<br class="desktop-break">
             <span class="typewriter-container">
               <span id="typewriter"></span><span class="cursor">_</span>
             </span>
@@ -426,9 +426,9 @@
 
         <div class="projects-grid">
           
-          <!-- Project 1 -->
+          <!-- Project 1: NovaFlow -->
           <div class="project-card glass-card">
-            <div class="project-preview preview-gradient-1">
+            <div class="project-preview preview-gradient-1 open-demo-modal" data-demo="demos/novaflow/index.html" data-title="NovaFlow — AI Workflow & Automation Web App">
               <div class="project-badge">SaaS / Web App</div>
               <div class="preview-mockup">
                 <div class="mockup-bar"></div>
@@ -437,53 +437,67 @@
                   <div class="mockup-chart-line"></div>
                 </div>
               </div>
+              <div class="preview-hover-overlay">
+                <span class="btn-play-preview"><i class="fa-solid fa-play"></i> Launch Live App</span>
+              </div>
             </div>
             <div class="project-info">
               <div class="project-tech-stack">
                 <span>HTML5</span>
                 <span>CSS3 Grid</span>
                 <span>Vanilla JS</span>
-                <span>Glassmorphism</span>
+                <span>AI Workflow</span>
               </div>
-              <h3 class="project-title">NovaFlow — AI Workflow Landing Page</h3>
-              <p class="project-desc">A futuristic, high-conversion landing page for next-generation automation tools featuring dark mode, glowing accents, and smooth scroll animations.</p>
-              <div class="project-links">
-                <a href="#contact" class="btn-project-action">
-                  <span>Request Custom Site</span>
+              <h3 class="project-title">NovaFlow — AI Workflow Automation</h3>
+              <p class="project-desc">An interactive next-generation automation & AI pipeline builder featuring visual node graphs, real-time simulated execution, and live LLM prompt playground.</p>
+              <div class="project-actions-row">
+                <a href="demos/novaflow/index.html" target="_blank" class="btn-demo-primary open-demo-modal" data-demo="demos/novaflow/index.html" data-title="NovaFlow — AI Workflow & Automation Web App">
+                  <i class="fa-solid fa-bolt"></i>
+                  <span>Live Demo</span>
+                </a>
+                <a href="#contact" class="btn-demo-secondary">
+                  <span>Hire / Request</span>
                   <i class="fa-solid fa-arrow-right"></i>
                 </a>
               </div>
             </div>
           </div>
 
-          <!-- Project 2 -->
+          <!-- Project 2: Aura Luxe -->
           <div class="project-card glass-card">
-            <div class="project-preview preview-gradient-2">
+            <div class="project-preview preview-gradient-2 open-demo-modal" data-demo="demos/aura-luxe/index.html" data-title="Aura Luxe — Minimalist Streetwear Store">
               <div class="project-badge">E-Commerce</div>
               <div class="preview-mockup">
                 <div class="mockup-card-product"></div>
                 <div class="mockup-pill-cart"></div>
+              </div>
+              <div class="preview-hover-overlay">
+                <span class="btn-play-preview"><i class="fa-solid fa-bag-shopping"></i> Launch Store Demo</span>
               </div>
             </div>
             <div class="project-info">
               <div class="project-tech-stack">
                 <span>JavaScript</span>
                 <span>Flexbox</span>
-                <span>CSS Animations</span>
+                <span>Cart Drawer</span>
                 <span>Responsive</span>
               </div>
-              <h3 class="project-title">Aura Luxe — Minimalist Streetwear Store</h3>
-              <p class="project-desc">An aesthetic e-commerce interface with dynamic product filtering, smooth hover reveals, interactive cart drawer, and mobile-first layouts.</p>
-              <div class="project-links">
-                <a href="#contact" class="btn-project-action">
-                  <span>Request Custom Site</span>
+              <h3 class="project-title">Aura Luxe — Minimalist Streetwear</h3>
+              <p class="project-desc">An aesthetic luxury e-commerce storefront with dynamic product showcase, real-time slide-out cart drawer, subtotal calculation, and checkout simulation.</p>
+              <div class="project-actions-row">
+                <a href="demos/aura-luxe/index.html" target="_blank" class="btn-demo-primary open-demo-modal" data-demo="demos/aura-luxe/index.html" data-title="Aura Luxe — Minimalist Streetwear Store">
+                  <i class="fa-solid fa-bolt"></i>
+                  <span>Live Demo</span>
+                </a>
+                <a href="#contact" class="btn-demo-secondary">
+                  <span>Hire / Request</span>
                   <i class="fa-solid fa-arrow-right"></i>
                 </a>
               </div>
             </div>
           </div>
 
-          <!-- Project 3 -->
+          <!-- Project 3: SRSH Webworks -->
           <div class="project-card glass-card">
             <div class="project-preview preview-gradient-3">
               <div class="project-badge">Creator & Agency</div>
@@ -497,14 +511,18 @@
               <div class="project-tech-stack">
                 <span>Modern Web APIs</span>
                 <span>CSS Variables</span>
-                <span>Micro-Interactions</span>
+                <span>Brand Identity</span>
               </div>
-              <h3 class="project-title">SRSH Webworks — Agency Showcase Hub</h3>
-              <p class="project-desc">A brand identity and portfolio hub designed for digital creators, integrating Instagram reels previews, client testimonials, and WhatsApp instant bookings.</p>
-              <div class="project-links">
-                <a href="https://www.instagram.com/srsh.webworks?igsi=cGtkYTVydmQ3bGxr" target="_blank" rel="noopener noreferrer" class="btn-project-action">
-                  <span>Visit Instagram</span>
+              <h3 class="project-title">SRSH Webworks — Creative Hub</h3>
+              <p class="project-desc">The digital brand hub and creative agency showcasing modern web development, UI/UX experiments, and direct client project bookings.</p>
+              <div class="project-actions-row">
+                <a href="https://www.instagram.com/srsh.webworks?igsi=cGtkYTVydmQ3bGxr" target="_blank" rel="noopener noreferrer" class="btn-demo-primary btn-ig-accent">
                   <i class="fa-brands fa-instagram"></i>
+                  <span>@srsh.webworks</span>
+                </a>
+                <a href="#contact" class="btn-demo-secondary">
+                  <span>Contact</span>
+                  <i class="fa-solid fa-arrow-right"></i>
                 </a>
               </div>
             </div>
@@ -513,6 +531,34 @@
         </div>
       </div>
     </section>
+
+    <!-- LIVE DEMO MODAL POPUP VIEWER -->
+    <div id="demoModal" class="demo-modal-overlay" aria-hidden="true" role="dialog">
+      <div class="demo-modal-container">
+        <div class="demo-modal-header">
+          <div class="modal-header-left">
+            <span class="modal-status-dot"></span>
+            <h4 id="demoModalTitle" class="demo-modal-title">Live Web App Demo</h4>
+          </div>
+          <div class="modal-header-actions">
+            <a id="demoModalFullLink" href="#" target="_blank" class="btn-modal-action" title="Open in New Tab">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+              <span>Full Screen</span>
+            </a>
+            <button id="closeDemoModalBtn" class="btn-modal-close" aria-label="Close Demo Modal">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+        </div>
+        <div class="demo-modal-iframe-wrapper">
+          <div class="demo-loading-spinner" id="demoSpinner">
+            <i class="fa-solid fa-spinner fa-spin"></i>
+            <span>Loading Interactive Web App...</span>
+          </div>
+          <iframe id="demoIframe" src="" title="Interactive Demo Preview" frameborder="0"></iframe>
+        </div>
+      </div>
+    </div>
 
     <!-- SECTION 05: INTERACTIVE DEVELOPER TERMINAL -->
     <section class="section-container" id="terminal">

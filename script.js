@@ -12,6 +12,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initFloatingAction();
   initScrollSpy();
   initDynamicYear();
+  initDemoModal();
+  initCodeProtection();
 });
 
 /* --------------------------------------------------------------------------
@@ -464,3 +466,150 @@ function initDynamicYear() {
     yearElem.textContent = new Date().getFullYear();
   }
 }
+
+/* --------------------------------------------------------------------------
+   9. INTERACTIVE DEMO MODAL VIEWER
+   -------------------------------------------------------------------------- */
+function initDemoModal() {
+  const demoModal = document.getElementById('demoModal');
+  const demoIframe = document.getElementById('demoIframe');
+  const demoModalTitle = document.getElementById('demoModalTitle');
+  const demoModalFullLink = document.getElementById('demoModalFullLink');
+  const closeDemoModalBtn = document.getElementById('closeDemoModalBtn');
+  const demoSpinner = document.getElementById('demoSpinner');
+  const openButtons = document.querySelectorAll('.open-demo-modal');
+
+  if (!demoModal || !demoIframe) return;
+
+  function openModal(demoUrl, title) {
+    if (!demoUrl) return;
+    if (demoModalTitle) demoModalTitle.textContent = title || 'Live Web App Demo';
+    if (demoModalFullLink) demoModalFullLink.href = demoUrl;
+
+    if (demoSpinner) demoSpinner.classList.remove('hidden');
+    demoIframe.src = demoUrl;
+    demoModal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+
+    demoIframe.onload = () => {
+      if (demoSpinner) demoSpinner.classList.add('hidden');
+    };
+  }
+
+  function closeModal() {
+    demoModal.classList.remove('open');
+    document.body.style.overflow = '';
+    setTimeout(() => {
+      demoIframe.src = '';
+    }, 300);
+  }
+
+  openButtons.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const demoUrl = btn.getAttribute('data-demo');
+      const title = btn.getAttribute('data-title');
+      if (demoUrl) {
+        e.preventDefault();
+        openModal(demoUrl, title);
+      }
+    });
+  });
+
+  if (closeDemoModalBtn) {
+    closeDemoModalBtn.addEventListener('click', closeModal);
+  }
+
+  demoModal.addEventListener('click', (e) => {
+    if (e.target === demoModal) {
+      closeModal();
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && demoModal.classList.contains('open')) {
+      closeModal();
+    }
+  });
+}
+
+/* --------------------------------------------------------------------------
+   10. SOURCE CODE & INSPECT PROTECTION (Anti-Ctrl+U, Anti-F12, Anti-Inspect)
+   -------------------------------------------------------------------------- */
+function initCodeProtection() {
+  // 1. Disable Right-Click Context Menu
+  document.addEventListener('contextmenu', (e) => {
+    e.preventDefault();
+    showToast('Protected Content 🛡️', 'Source code inspection and right-click are disabled.');
+    return false;
+  });
+
+  // 2. Disable Keyboard Shortcuts (Ctrl+U, F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+Shift+C, Ctrl+S)
+  document.addEventListener('keydown', (e) => {
+    // F12 key
+    if (e.key === 'F12' || e.keyCode === 123) {
+      e.preventDefault();
+      e.stopPropagation();
+      showToast('Protected 🛡️', 'Developer tools are restricted on this portfolio.');
+      return false;
+    }
+
+    // Ctrl + U (View Page Source) or Cmd + Option + U on Mac
+    if ((e.ctrlKey || e.metaKey) && (e.key === 'u' || e.key === 'U' || e.keyCode === 85)) {
+      e.preventDefault();
+      e.stopPropagation();
+      showToast('Source Code Protected 🛡️', 'View Page Source (Ctrl+U) is disabled.');
+      return false;
+    }
+
+    // Ctrl + Shift + I (Inspect) or Cmd + Option + I
+    if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'i' || e.key === 'I' || e.keyCode === 73)) {
+      e.preventDefault();
+      e.stopPropagation();
+      showToast('Protected 🛡️', 'Inspect element is disabled.');
+      return false;
+    }
+
+    // Ctrl + Shift + J (Console) or Cmd + Option + J
+    if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'j' || e.key === 'J' || e.keyCode === 74)) {
+      e.preventDefault();
+      e.stopPropagation();
+      showToast('Protected 🛡️', 'Developer console is disabled.');
+      return false;
+    }
+
+    // Ctrl + Shift + C (Element Inspector)
+    if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'c' || e.key === 'C' || e.keyCode === 67)) {
+      e.preventDefault();
+      e.stopPropagation();
+      showToast('Protected 🛡️', 'Element inspection is disabled.');
+      return false;
+    }
+
+    // Ctrl + S (Save Page)
+    if ((e.ctrlKey || e.metaKey) && (e.key === 's' || e.key === 'S' || e.keyCode === 83)) {
+      e.preventDefault();
+      e.stopPropagation();
+      showToast('Protected 🛡️', 'Page saving is disabled.');
+      return false;
+    }
+  });
+
+  // 3. DevTools Watermark in Console
+  const watermarkStyle = [
+    'color: #00f2fe',
+    'font-size: 18px',
+    'font-weight: bold',
+    'background: #070a12',
+    'padding: 8px 14px',
+    'border: 1px solid #00f2fe',
+    'border-radius: 6px'
+  ].join(';');
+
+  console.log('%c⚡ srsh.webworks — Protected Source Code', watermarkStyle);
+  console.log(
+    '%cDesigned & Engineered by Saaransh (18 y/o Web Developer).\nNeed custom web development? Contact: saaranshangrish73@gmail.com | +91 9015008573 | IG: @srsh.webworks',
+    'color: #a855f7; font-size: 12px;'
+  );
+}
+
+
